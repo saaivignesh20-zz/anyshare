@@ -8,7 +8,5 @@
 </p>
 <p>
 	Developers:<br>
-	@saaivignesh20<br>
-	@adithhari
-	@girish0212
+	<a href="https://github.com/saaivignesh20">saaivignesh20">, <a href="https://github.com/adithhari">adithhari">, <a href="https://github.com/girish0212">girish0212">.
 </p>
