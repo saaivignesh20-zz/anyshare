@@ -16,7 +16,8 @@
             }
         }
 
-        return check;
+		authenticateUser(check);
+        return false;
     });
 
 
@@ -50,7 +51,7 @@
 
         $(thisAlert).removeClass('alert-validate');
     }
-    
-    
+
+
 
 })(jQuery);
