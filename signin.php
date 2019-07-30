@@ -47,15 +47,13 @@
 		 <div class="spinner"></div>
 		</div>
 		<script>
-			window.addEventListener('load', () => {
-				 const loader = document.getElementById('loader');
-				 setTimeout(() => {
-				   loader.classList.add('fadeOut');
-				 }, 300);
-			   });
+			window.onload = function() {
+				var imageno = Math.floor(Math.random() * 5);
+				bgc.style.backgroundImage = "url('images/background" + imageno + ".jpg')";
+			}
 		</script>
 		<div class="limiter">
-			<div class="container-login100" style="background-image: url('images/background.jpg');">
+			<div class="container-login100" id="bgc" style="">
 				<div class="wrap-login100 p-t-40 p-b-30">
 					<form class="login100-form validate-form" action="auth.php" method="post" id="loginform">
 						<div class="login100-form-avatar">
@@ -73,7 +71,7 @@
 
 
 						<div class="wrap-input100 validate-input m-b-10" data-validate = "Username is required">
-							<input class="input100" type="text" name="un" placeholder="Email ID/Username">
+							<input class="input100" type="text" name="un" id="un" placeholder="Email ID/Username">
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
 								<i class="fa fa-user"></i>
@@ -81,7 +79,7 @@
 						</div>
 
 						<div class="wrap-input100 validate-input m-b-10" data-validate = "Password is required">
-							<input class="input100" type="password" name="pw" placeholder="Password">
+							<input class="input100" type="password" name="pw" id="pw" placeholder="Password">
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
 								<i class="fa fa-lock"></i>
@@ -100,52 +98,53 @@
 							</a>
 						</div>
 
-						<div class="text-center w-full">
+						<div class="text-center w-full txt1">
+							New to AnyShare?
 							<a class="txt1" href="#">
-								Create new account
+								Sign up
 								<i class="fa fa-long-arrow-right"></i>
 							</a>
 						</div>
 					</form>
-					<!-- Message Modal -->
-					<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-						  <div class="modal-header">
-							<h5 class="modal-title" id="msgModalTitle">[Title]</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							  <span aria-hidden="true">&times;</span>
-							</button>
-						  </div>
-						  <div class="modal-body">
-							  <div class="col-md-12">
-									<div class="panel panel-default">
-										<div class="panel-body">
-											<div class="text-center">
-												<form id="msgModalForm" method="POST">
-													<p style="margin-bottom: 32px" id="msgModalText">[Text]</p>
-													<div class="container-login100-form-btn" style="margin-top: 24px; margin-bottom: 16px;">
-														<div class="wrap-login100-form-btn">
-															<div class="login100-form-bgbtn"></div>
-															<button class="login100-form-btn" id="msgModalButton">
-																[Caption]
-															</button>
-														</div>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-						  </div>
-					  </div>
-					  </div>
-					</div>
+
 				</div>
 			</div>
 		</div>
 
-
+		<!-- Message Modal -->
+		<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="msgModalTitle">[Title]</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				  <div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="text-center">
+									<form id="msgModalForm" method="POST">
+										<p style="margin-bottom: 32px" id="msgModalText">[Text]</p>
+										<div class="container-login100-form-btn" style="margin-top: 24px; margin-bottom: 16px;">
+											<div class="wrap-login100-form-btn">
+												<div class="login100-form-bgbtn"></div>
+												<button class="login100-form-btn" id="msgModalButton">
+													[Caption]
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+			  </div>
+		  </div>
+		  </div>
+		</div>
 	<!--===============================================================================================-->
 	<!--================================Client Side Authentication Script==============================-->
 	<script language="javascript">
@@ -165,6 +164,7 @@
 	<!--===============================================================================================-->
 		<script>
 			$(document).ready(function(){
+				loader.classList.remove('fadeOut');
 				var dbflag = checkDashboardFlag();
 				if (dbflag) {
 
@@ -187,7 +187,7 @@
 								 } else if (data == "alreadysent") {
 									 alert("A password reset link has already been generated within 30 minutes of current time. If you want to generate an another one, please try after half-an-hour.");
 								 } else if (data == "notexist") {
-									 alert("No account exists with the given e-mail id. If you're trying to register, please click the 'Sign-up' link.");
+									 alert("No account exists with the given e-mail id. If you're trying to register, please click the 'Sign up' link.");
 								 } else if (data == "noargs") {
 									 alert("Error with client side.")
 								 } else if (data == "dberror") {
@@ -211,6 +211,9 @@
 			/* Ajax Authentication Logic */
 			function authenticateUser(formvalid) {
 				if (formvalid) {
+					// show loader
+					loader.style.opacity = 0.5;
+					loader.classList.remove('fadeOut');
 					// make ajax request
 					var frm = $("#loginform");
 					var url = "auth.php";
@@ -223,7 +226,7 @@
 							   // validate response and show message
 							   if (data == "authok") {
 								   window.location.href = "dashboard.php";
-							   } else if (data == "wrongpw") {
+							   } else if (data == "invalidpw") {
 								   showMsgModal("Authentication Failure", "Invalid password. Please check and try again.", "OK", 2);
 								   pw.value = "";
 							   } else if (data.startsWith("alreadysignedin")) {
@@ -234,23 +237,25 @@
 								   showMsgModal("Authentication Failure", "Session timed out. Please sign-in again.", "OK", 1);
 								   un.value = "";
 								   pw.value = "";
-							   } else if (data == "notexist") {
-								   showMsgModal("Authentication Failure", "No account exists with the entered username. If you're trying to register, please click the 'Sign-up' link.", "OK", 2);
+							   } else if (data == "invaliduser") {
+								   showMsgModal("Authentication Failure", "No account exists with the entered username. If you're trying to register, please click the 'Sign up' link.", "OK", 2);
 								   un.value = "";
 								   pw.value = "";
 							   } else if (data == "argserror") {
 								   showMsgModal("Internal Error", "Error with client side.", "OK", 2);
 							   } else if (data == "invalidtoken") {
 								   showMsgModal("Security Error", "Cannot sign-in with invalid token.", "OK", 2);
-							   } else if (data == "dberror") {
+							   } else if (data == "dbfail") {
 								   showMsgModal("Internal Error", "Server error.", "OK", 2);
 							   } else {
 								   alert(data);
 							   }
+							   loader.classList.add('fadeOut');
 						   },
 						 error: function(errorCode)
 						 {
 							 alert("Error " + eval(errorCode.status) + ": Unexpected error while making request to server.");
+							 loader.classList.add('fadeOut');
 						 }
 					 });
 				}
@@ -303,6 +308,7 @@
 						   data: "token=" + cookie, // serializes the form's elements.
 						   success: function(data)
 						   {
+							   loader.classList.add('fadeOut');
 							   // validate response and show message
 							   if (data == "authok") {
 								   window.location.href = "dashboard.php";
@@ -318,7 +324,7 @@
 								   un.value = "";
 								   pw.value = "";
 							   } else if (data == "notexist") {
-								   showMsgModal("Authentication Failure", "No account exists with the entered username. If you're trying to register, please click the 'Sign-up' link.", "OK", 2);
+								   showMsgModal("Authentication Failure", "No account exists with the entered username. If you're trying to register, please click the 'Sign up' link.", "OK", 2);
 								   un.value = "";
 								   pw.value = "";
 							   } else if (data == "argserror") {
@@ -334,8 +340,11 @@
 						 error: function(errorCode)
 						 {
 							 alert("Error " + eval(errorCode.status) + ": Unexpected error while making request to server.");
+							 loader.classList.add('fadeOut');
 						 }
 					 });
+				} else {
+					loader.classList.add('fadeOut');
 				}
 			}
 
