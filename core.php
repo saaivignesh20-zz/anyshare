@@ -16,10 +16,10 @@
     }
 
     /* Server Variables */
-    const dbhost = "den1.mysql6.gear.host";
-    const dbun = "anyshare";
-    const dbpw = "ags@123";
-    const db = "anyshare";
+    const dbhost = 'den1.mysql6.gear.host';
+    const dbun = '';
+    const dbpw = '';
+    const db = 'anyshare';
 
     /* User Class */
     class User {
