@@ -16,8 +16,8 @@
     }
 
     /* Server Variables */
-    const dbhost = 'den1.mysql6.gear.host';
-    const dbun = '';
+    const dbhost = 'localhost';
+    const dbun = 'root';
     const dbpw = '';
     const db = 'anyshare';
 

@@ -131,7 +131,7 @@
 										<div class="container-login100-form-btn" style="margin-top: 24px; margin-bottom: 16px;">
 											<div class="wrap-login100-form-btn">
 												<div class="login100-form-bgbtn"></div>
-												<button class="login100-form-btn" id="msgModalButton">
+												<button class="login100-form-btn" id="msgModalButton" data-dismiss="modal">
 													[Caption]
 												</button>
 											</div>
