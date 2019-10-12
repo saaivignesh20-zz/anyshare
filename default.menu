@@ -1,0 +1,36 @@
+<nav class="navbar-sidebar">
+    <ul class="list-unstyled navbar__list">
+        <li class="has-sub" style="text-align: center;">
+          <button type="button" class="au-btn au-btn-icon au-btn--green au-btn--small btn uploadbutton" onClick="$('#uploadModal').modal('show')" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-cloud-upload-alt"></i>Upload
+          </button>
+        </li>
+        <li class="has-sub" id="homelink">
+            <a class="js-arrow" href="#">
+                <i class="fas fa-home"></i>Home</a>
+            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                <li>
+                    <a class="has-sub" href="dashboard.php"><i class="fas fa-history"></i>Dashboard</a>
+                </li>
+                <li>
+                    <a class="has-sub" href="index.html"><i class="fas fa-history"></i>Recent</a>
+                </li>
+                <li>
+                    <a class="has-sub" href="index.html"><i class="fas fa-star"></i>Starred</a>
+                </li>
+            </ul>
+        </li>
+        <li id="fileslink">
+            <a href="files.php">
+                <i class="fas fa-folder"></i>Files</a>
+        </li>
+        <li id="trashlink">
+            <a href="table.html">
+                <i class="far fa-trash-alt"></i>Trash</a>
+        </li>
+        <li id="storagelink">
+            <a href="form.html">
+                <i class="fas fa-server"></i>Storage</a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,125 @@
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 100;
+  font-style: normal;
+  src: url('../fonts/Ubuntu/Ubuntu-Light.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 100;
+  font-style: italic;
+  src: url('../fonts/Ubuntu/Ubuntu-LightItalic.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 200;
+  font-style: normal;
+  src: url('../fonts/Ubuntu/Ubuntu-Light.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 200;
+  font-style: italic;
+  src: url('../fonts/Ubuntu/Ubuntu-LightItalic.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 300;
+  font-style: normal;
+  src: url('../fonts/Ubuntu/Ubuntu-Light.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 300;
+  font-style: italic;
+  src: url('../fonts/Ubuntu/Ubuntu-LightItalic.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/Ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 400;
+  font-style: italic;
+  src: url('../fonts/Ubuntu/Ubuntu-RegularItalic.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 500;
+  font-style: normal;
+  src: url('../fonts/Ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 500;
+  font-style: italic;
+  src: url('../fonts/Ubuntu/Ubuntu-RegularItalic.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 600;
+  font-style: normal;
+  src: url('../fonts/Ubuntu/Ubuntu-Medium.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 600;
+  font-style: italic;
+  src: url('../fonts/Ubuntu/Ubuntu-MediumItalic.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 700;
+  font-style: normal;
+  src: url('../fonts/Ubuntu/Ubuntu-Bold.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 700;
+  font-style: italic;
+  src: url('../fonts/Ubuntu/Ubuntu-Bold.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 800;
+  font-style: normal;
+  src: url('../fonts/Ubuntu/Ubuntu-Bold.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 800;
+  font-style: italic;
+  src: url('../fonts/Ubuntu/Ubuntu-Bold.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 900;
+  font-style: normal;
+  src: url('../fonts/Ubuntu/Ubuntu-Bold.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu;
+  font-weight: 900;
+  font-style: italic;
+  src: url('../fonts/Ubuntu/Ubuntu-Bold.ttf');
+}

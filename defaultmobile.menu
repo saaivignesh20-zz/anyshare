@@ -1,0 +1,33 @@
+<nav class="navbar-mobile">
+    <div class="container-fluid">
+        <ul class="navbar-mobile__list list-unstyled">
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-tachometer-alt"></i>Home</a>
+                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                    <li>
+                        <a href="dashboard.php">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="index.html">Recent</a>
+                    </li>
+                    <li>
+                        <a href="index2.html">Starred</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="files.php">
+                    <i class="fas fa-chart-bar"></i>Files</a>
+            </li>
+            <li>
+                <a href="table.html">
+                    <i class="fas fa-table"></i>Trash</a>
+            </li>
+            <li>
+                <a href="form.html">
+                    <i class="far fa-check-square"></i>Storage</a>
+            </li>
+        </ul>
+    </div>
+</nav>

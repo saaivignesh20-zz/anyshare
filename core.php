@@ -16,10 +16,10 @@
     }
 
     /* Server Variables */
-    const dbhost = 'localhost';
-    const dbun = 'root';
-    const dbpw = '';
-    const db = 'anyshare';
+    const dbhost = "localhost";
+    const dbun = "root";
+    const dbpw = "";
+    const db = "anyshare";
 
     /* User Class */
     class User {
@@ -60,6 +60,7 @@
                             while ($row = $result->fetch_assoc()) {
                                 if ($this->username == $row['emailid']) {
                                     $this->username = $row['username'];
+                                    $this->screenname = $row['screenname'];
                                 }
                                 $sqlpw = $row['password'];
                                 $subpw = hash('sha512', $this->password);
@@ -161,27 +162,52 @@
                     if ($conn->connect_error) {
                         $this->status = AuthStatus::DB_FAIL;
                     } else {
-                        $stmt = $conn->prepare("SELECT * FROM authenticatedusers WHERE token= ?;");
+                        $stmt = $conn->prepare("SELECT * FROM authenticatedusers WHERE token = ?;");
                         $stmt->bind_param("s", $this->token);
                         $stmt->execute();
                         $result = $stmt->get_result();
                         if ($result->num_rows > 0) {
-                            // reset signin time if the difference is less or equal to one day
+                            // check whether the user actually exists
                             while ($row = $result->fetch_assoc()) {
-                                $sqlintime = new DateTime($row['intime']);
-                                $currentintime = new DateTime(date("Y-m-d H:i:s"));
-                                $interval = $sqlintime->diff($currentintime)->format('%r%a');
-                                if ($interval > 0) {
-                                    // sign out
-                                    setcookie("anyshareAuth", null, time() - 3600, "/");
-                                    $deauthstmt = $conn->prepare("DELETE FROM authenticatedusers WHERE token= ?;");
-                                    $deauthstmt->bind_param("s", $this->token);
-                                    $deauthstmt->execute();
-                                    $this->status = AuthStatus::SESSION_TIMEOUT;
-                                } else {
-                                    setcookie("anyshareAuth", $this->token, time() + 3600 * 24, "/");
-                                    $this->status = AuthStatus::AUTH_OK;
+                                $this->username = $row['username'];
+                            }
+                            $existstmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+                            $existstmt->bind_param("s", $this->username);
+                            $existstmt->execute();
+                            $existresult = $existstmt->get_result();
+                            if ($existresult->num_rows > 0) {
+                                // user exists, get screen name
+                                while ($row = $existresult->fetch_assoc()) {
+                                    $this->screenname = $row['screenname'];
                                 }
+                                $this->status = AuthStatus::AUTH_OK;
+                            } else {
+                                $this->status = AuthStatus::INVALID_USER;
+                            }
+                            // reset signin time if the difference is less or equal to one day
+                            if ($this->status != AuthStatus::INVALID_USER) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $sqlintime = new DateTime($row['intime']);
+                                    $currentintime = new DateTime(date("Y-m-d H:i:s"));
+                                    $interval = $sqlintime->diff($currentintime)->format('%r%a');
+                                    if ($interval > 0) {
+                                        // sign out
+                                        setcookie("anyshareAuth", null, time() - 3600, "/");
+                                        $deauthstmt = $conn->prepare("DELETE FROM authenticatedusers WHERE token= ?;");
+                                        $deauthstmt->bind_param("s", $this->token);
+                                        $deauthstmt->execute();
+                                        $this->status = AuthStatus::SESSION_TIMEOUT;
+                                    } else {
+                                        setcookie("anyshareAuth", $this->token, time() + 3600 * 24, "/");
+                                        $this->status = AuthStatus::AUTH_OK;
+                                    }
+                                }
+                            } else {
+                                // sign out
+                                setcookie("anyshareAuth", null, time() - 3600, "/");
+                                $deauthstmt = $conn->prepare("DELETE FROM authenticatedusers WHERE token= ?;");
+                                $deauthstmt->bind_param("s", $this->token);
+                                $deauthstmt->execute();
                             }
                         } else {
                             $this->status = AuthStatus::INVALID_TOKEN;
@@ -225,8 +251,24 @@
             return $this->status;
         }
 
-        public function getUsername() {
-            return $this->username;
+        public function getEmailID() {
+            $tempemail = "";
+            $conn = new mysqli(dbhost, dbun, dbpw, db);
+            if ($conn->connect_error) {
+                $this->status = AuthStatus::DB_FAIL;
+            } else {
+                $stmt = $conn->prepare("SELECT emailid FROM users WHERE username = ? OR emailid = ?");
+                $stmt->bind_param("ss", $this->username, $this->username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $tempemail = $row['emailid'];
+                    }
+                }
+            }
+            $conn->close();
+            return $tempemail;
         }
     }
 
@@ -269,5 +311,22 @@
         // Cannot find operating system so return Unknown
 
         return 'n/a';
+    }
+
+    function getAppLinkPath() {
+        $url = $_SERVER['REQUEST_URI']; //returns the current URL
+        $parts = explode('/',$url);
+        $dir = $_SERVER['SERVER_NAME'];
+        for ($i = 0; $i < count($parts) - 1; $i++) {
+         $dir .= $parts[$i] . "/";
+        }
+        $appPath = "http://".$dir;
+        return $appPath;
+    }
+
+    function buildDirectDownloadLink($fileid) {
+        $appPath = getAppLinkPath();
+        $directLink = $appPath."directdl.php?fileid=".$fileid;
+        return $directLink;
     }
 ?>

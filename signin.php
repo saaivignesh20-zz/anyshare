@@ -1,3 +1,9 @@
+<?php
+	if (isset($_POST['dbmsg'])) {
+		$f = $_POST['dbmsg'];
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,7 +137,7 @@
 										<div class="container-login100-form-btn" style="margin-top: 24px; margin-bottom: 16px;">
 											<div class="wrap-login100-form-btn">
 												<div class="login100-form-bgbtn"></div>
-												<button class="login100-form-btn" id="msgModalButton" data-dismiss="modal">
+												<button class="login100-form-btn" id="msgModalButton">
 													[Caption]
 												</button>
 											</div>
@@ -167,7 +173,7 @@
 				loader.classList.remove('fadeOut');
 				var dbflag = checkDashboardFlag();
 				if (dbflag) {
-
+					loader.classList.add('fadeOut');
 				} else {
 					checkSigninCookie();
 					getSignout();
